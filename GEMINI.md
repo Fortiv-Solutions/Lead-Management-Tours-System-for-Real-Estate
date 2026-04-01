@@ -257,3 +257,11 @@ This is a Real Estate Lead Management System & Virtual Tour platform, formerly k
 - REMOVED: "Tours Activity" from `Sidebar.tsx` and "tours" route from `App.tsx`.
 - CLEANUP: Removed `TourSummary` types, `useTourSummaries` hook, and associated mapper logic in `src/hooks/useSupabaseData.ts` and `src/types/index.ts`.
 - ARCHITECTURE: Streamlined the application to focus exclusively on Dashboard, Lead Inbox, and Lead Pipeline management.
+
+### 2026-04-01 (Git Repository Initialization)
+- INITIALIZED: Local Git repository in the project root.
+- CONFIGURED: Remote origin set to `https://github.com/Fortiv-Solutions/Lead-Management-Tours-System-for-Real-Estate.git`.
+- DEPLOYED: Pushed the first commit ("initial commit: ArchiSync - Real Estate Intelligence Dashboard") to the `main` branch.
+
+### 2026-04-01 (Git Configuration Update)
+- UPDATED: Git local configuration to use `dhyan219` (dhyan.patel@fortivsolution.in) for all future commits and pushes, replacing the legacy Gmail-based identity.

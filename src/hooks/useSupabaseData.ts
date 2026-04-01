@@ -126,7 +126,7 @@ function mapLeadFromDb(row: DbLead): Lead {
 
   return {
     id: row.id,
-    name: row.name && row.name !== 'unknown_name' ? row.name : 'Web Visitor',
+    name: row.name && row.name !== 'unknown_name' ? row.name : 'User',
     email: row.email,
     phone: row.phone,
     stage: stage,
@@ -183,7 +183,7 @@ function mapFollowup(row: DbFollowup, lead?: DbLead): Followup {
   return {
     id: row.id,
     leadId: row.lead_id ?? '',
-    leadName: lead?.name && lead.name !== 'unknown_name' ? lead.name : 'Web Visitor',
+    leadName: lead?.name && lead.name !== 'unknown_name' ? lead.name : 'WhatsApp User',
     leadScore: lead?.lead_score ?? undefined,
     leadBudget: budgetStr ?? undefined,
     leadSource: lead?.source ? normalizeSource(lead.source) : undefined,
@@ -221,7 +221,7 @@ function mapConversation(lead: DbLead, lastMessageContent?: string): Conversatio
   return {
     id: lead.id,
     leadId: lead.id,
-    name: lead.name && lead.name !== 'unknown_name' ? lead.name : 'Web Visitor',
+    name: lead.name && lead.name !== 'unknown_name' ? lead.name : 'User',
     source: normalizeSource(lead.source),
     lastMessage: lastMessageContent || null,
     lastMessageAt: lead.last_message_at,

@@ -182,13 +182,28 @@ const ConversationsPage = () => {
                   </p>
 
                   <div className="flex items-center space-x-2">
-                    <span className={`px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider ${
-                      c.matchScore >= 75 ? 'bg-red-100 text-red-700' :
-                      c.matchScore >= 30 ? 'bg-orange-100 text-orange-700' :
-                      'bg-blue-100 text-blue-700'
-                    }`}>
-                      {c.matchScore >= 75 ? 'HOT' : c.matchScore >= 30 ? 'WARM' : 'COLD'}
-                    </span>
+                    {(() => {
+                      const score = c.matchScore
+                      const isHot = score >= 80 || (c.intent?.toLowerCase().includes('visit'))
+                      const isWarm = score >= 45
+                      
+                      let label = 'COLD'
+                      let styles = 'bg-blue-50 text-blue-700'
+                      
+                      if (isHot) {
+                        label = 'HOT'
+                        styles = 'bg-red-50 text-red-700'
+                      } else if (isWarm) {
+                        label = 'WARM'
+                        styles = 'bg-orange-50 text-orange-700'
+                      }
+                      
+                      return (
+                        <span className={`px-2 py-0.5 rounded text-[9px] font-black uppercase tracking-wider ${styles}`}>
+                          {label}
+                        </span>
+                      )
+                    })()}
                     {c.intent && (
                       <span className="px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant text-[9px] font-bold uppercase tracking-wider truncate">
                         {c.intent.replace('_', ' ')}
@@ -248,11 +263,11 @@ const ConversationsPage = () => {
                         <span className="material-symbols-outlined text-primary text-[20px]">forum</span>
                         <h3 className="text-[11px] font-black uppercase tracking-[0.2em] text-on-surface-variant">Conversation History</h3>
                       </div>
-                      <span className={`px-3 py-1 rounded text-[10px] font-black uppercase tracking-widest ${
-                        selectedConversation.matchScore >= 75 ? 'bg-red-100 text-red-700' : 'bg-orange-100 text-orange-700'
-                      }`}>
-                        {selectedConversation.matchScore >= 75 ? 'High Intent' : 'Warm Prospect'}
-                      </span>
+                      {selectedConversation.matchScore >= 75 && (
+                        <span className="px-3 py-1 rounded text-[10px] font-black uppercase tracking-widest bg-red-100 text-red-700">
+                          High Intent
+                        </span>
+                      )}
                     </div>
 
                     <div className="p-8 flex-1 bg-surface-container/10">
@@ -330,16 +345,45 @@ const ConversationsPage = () => {
                     <div className="bg-surface-container/30 rounded-3xl p-6 space-y-6 border border-surface-container-high/50">
                       <div className="flex justify-between items-end">
                         <div>
-                          <span className="text-[10px] font-black uppercase tracking-wider text-on-surface-variant block mb-1">Intent Level</span>
-                          <span className={`text-[12px] font-black px-3 py-1 rounded-full ${
-                            selectedConversation.matchScore >= 75 ? 'bg-red-500 text-white' : 'bg-orange-400 text-white'
-                          }`}>
-                            {selectedConversation.matchScore >= 75 ? 'HIGH INTENT' : 'WARM PROSPECT'}
-                          </span>
+                          <span className="text-[10px] font-black uppercase tracking-wider text-on-surface-variant block mb-2">Intent Level</span>
+                          {(() => {
+                            const score = selectedConversation.matchScore
+                            let label = 'COLD LEAD'
+                            let color = 'bg-slate-400'
+                            
+                            if (score >= 85) {
+                              label = 'HIGH INTENT'
+                              color = 'bg-red-500'
+                            } else if (score >= 60) {
+                              label = 'WARM PROSPECT'
+                              color = 'bg-orange-500'
+                            } else if (score >= 30) {
+                              label = 'ACTIVE INQUIRY'
+                              color = 'bg-amber-500'
+                            }
+
+                            return (
+                              <div className={`flex items-center px-3 py-1.5 rounded-xl ${color} shadow-sm border border-white/20`}>
+                                <span className="material-symbols-outlined text-[14px] text-white mr-1.5">
+                                  {score >= 85 ? 'local_fire_department' : score >= 60 ? 'trending_up' : score >= 30 ? 'visibility' : 'ac_unit'}
+                                </span>
+                                <span className="text-[10px] font-black text-white uppercase tracking-wider">
+                                  {label}
+                                </span>
+                              </div>
+                            )
+                          })()}
                         </div>
                         <div className="text-right">
                           <span className="text-[10px] font-black uppercase tracking-wider text-on-surface-variant block mb-1">Lead Health</span>
-                          <span className="text-2xl font-black text-on-surface">Excellent</span>
+                          <span className={`text-xl font-black ${
+                            selectedConversation.matchScore >= 80 ? 'text-primary' : 
+                            selectedConversation.matchScore >= 50 ? 'text-secondary' : 
+                            'text-on-surface-variant'
+                          }`}>
+                            {selectedConversation.matchScore >= 80 ? 'Excellent' : 
+                             selectedConversation.matchScore >= 50 ? 'Good' : 'Evaluating'}
+                          </span>
                         </div>
                       </div>
 

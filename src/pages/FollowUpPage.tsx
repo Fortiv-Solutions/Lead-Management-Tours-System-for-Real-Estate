@@ -258,39 +258,6 @@ const FollowUpPage = () => {
           )}
         </div>
       </div>
-
-      {/* Automation Insights - Contextual Sidebar hint */}
-      <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-primary/5 p-8 rounded-xl border border-primary/20 text-left">
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-              <span className="material-symbols-outlined text-primary">psychology</span>
-            </div>
-            <h4 className="font-black text-primary uppercase tracking-wider">AI Strategy Tip</h4>
-          </div>
-          <p className="text-sm text-primary/80 leading-relaxed italic">
-            "Leads who receive a virtual tour follow-up within 24 hours of capture are <span className="font-bold underline">3.4x more likely</span> to convert to a site visit. Use the 'Tour Recap' template for optimal engagement."
-          </p>
-        </div>
-
-        <div className="bg-secondary/5 p-8 rounded-xl border border-secondary/20 text-left">
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center">
-              <span className="material-symbols-outlined text-secondary">trending_up</span>
-            </div>
-            <h4 className="font-black text-secondary uppercase tracking-wider">Delivery Performance</h4>
-          </div>
-          <div className="space-y-4">
-            <div className="flex justify-between items-center text-xs">
-              <span className="text-on-surface-variant">WhatsApp Delivery Rate</span>
-              <span className="font-bold text-secondary">98.2%</span>
-            </div>
-            <div className="h-1.5 bg-secondary/10 rounded-full overflow-hidden">
-              <div className="h-full bg-secondary" style={{ width: '98.2%' }}></div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
